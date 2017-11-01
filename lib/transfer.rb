@@ -1,3 +1,4 @@
+require "pry"
 class Transfer
   def initialize(sender, receiver, amount)
     @sender = sender
@@ -15,6 +16,7 @@ class Transfer
   def execute_transaction
     @sender.balance -= @amount && @receiver.balance += @amount if valid? && @status == "pending"
     @status = "executed"
+    binding.pry
   end
 
   def reverse_transaction
