@@ -15,12 +15,12 @@ class Transfer
 
   def execute_transaction
     binding.pry
-    @sender.balance -= @amount && @receiver.balance += @amount if valid? && @status == "pending"
+    ((@sender.balance -= @amount) && (@receiver.balance += @amount)) if valid? && @status == "pending"
     @status = "executed"
   end
 
   def reverse_transaction
-    @receiver.balance -= @amount && @sender.balance += @amount if @status == "executed"
+    ((@receiver.balance -= @amount) && (@sender.balance += @amount)) if @status == "executed"
     @status = "reversed"
   end
 end
