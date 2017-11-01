@@ -19,5 +19,6 @@ class Transfer
 
   def reverse_transaction
     @receiver.balance -= @amount && @sender.balance += @amount if @status == "executed"
+    @status = "reversed"
   end
 end
