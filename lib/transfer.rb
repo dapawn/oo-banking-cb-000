@@ -1,22 +1,22 @@
 class Transfer
-  def initialize(sender, reciever, amount)
+  def initialize(sender, receiver, amount)
     @sender = sender
-    @reciever = reciever
+    @receiver = receiver
     @status = "pending"
     @amount = amount
   end
 
-  attr_accessor :sender, :reciever, :status, :amount
+  attr_accessor :sender, :receiver, :status, :amount
 
   def valid?
-    @sender.valid? && @reciever.valid?
+    @sender.valid? && @receiver.valid?
   end
 
   def execute_transaction
-    @sender.balance -= @amount && @reciever.balance += @amount if valid?
+    @sender.balance -= @amount && @receiver.balance += @amount if valid?
   end
 
   def reverse_transaction
-    @reciever.balance -= @amount && @sender.balance += @amount if @status == "executed"
+    @receiver.balance -= @amount && @sender.balance += @amount if @status == "executed"
   end
 end
