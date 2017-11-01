@@ -10,7 +10,7 @@ class Transfer
   attr_accessor :sender, :receiver, :status, :amount
 
   def valid?
-    @sender.balance - @amount > 0 && @receiver.valid?
+    @sender.balance - @amount > 0 && @receiver.valid? && @sender.valid?
   end
 
   def execute_transaction
@@ -24,7 +24,7 @@ class Transfer
   end
 
   def reverse_transfer
-    ((@receiver.balance -= @amount) && (@sender.balance += @amount)) if @status == "executed"
+    ((@receiver.balance -= @amount) && (@sender.balance += @amount)) if @status == "complete"
     @status = "reversed"
   end
 end
